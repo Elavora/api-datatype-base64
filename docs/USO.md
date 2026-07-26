@@ -1,47 +1,30 @@
 # Guia de uso
 
-DataType Base64 para aplicacoes Elavora API.
-
-## Instalacao
-
-```bash
-composer require elavora/api-datatype-base64
-```
-
-## Quando usar
-
-- Validar e normalizar valores antes de chegar na regra de negocio.
-- Evitar passar strings soltas entre services, DTOs e persistencia.
-- Reutilizar a mesma validacao em controllers, comandos e testes.
-
-## Exemplo rapido
+`Base64` valida strings aceitas pelo decodificador estrito de Base64 do PHP.
 
 ```php
 use Elavora\Api\DataTypes\Base64;
 
-$valor = new Base64('exemplo');
-$normalizado = $valor->value();
+$base64 = Base64::from(base64_encode('api'));
+
+echo $base64->value(); // YXBp
 ```
 
-## Principais pontos de entrada
+O valor armazenado nao e recodificado nem alterado. Para transformar dados brutos em Base64, use `base64_encode()` antes de criar o DataType.
 
-- `Elavora\Api\DataTypes\Base64`
+Para verificar uma entrada sem criar uma instancia:
 
-## Dependencias de runtime
+```php
+if (Base64::isValid($entrada)) {
+    $base64 = Base64::from($entrada);
+}
+```
 
-- `elavora/api-datatype-core` `^0.1`
+## Validacao do pacote
 
-## Validacao no projeto consumidor
-
-Depois de instalar o pacote, rode os testes da aplicacao consumidora. Para uma verificacao isolada do pacote, use container:
+Execute os comandos a partir da raiz do clone:
 
 ```bash
-docker run --rm -v "${PWD}:/workspace" -w "/workspace/api-datatype-base64" composer:2 composer validate --strict --no-check-publish
-docker run --rm -v "${PWD}:/workspace" -w "/workspace/api-datatype-base64" composer:2 sh -lc "find . \\( -path ./.git -o -path ./vendor \\) -prune -o -name '*.php' -print0 | xargs -0 -r -n1 php -l"
+docker run --rm -v "${PWD}:/workspace" -w /workspace composer:2 composer update --no-interaction --no-progress --prefer-dist
+docker run --rm -v "${PWD}:/workspace" -w /workspace composer:2 composer check
 ```
-
-## Observacoes
-
-- Mantenha regras de produto fora deste pacote.
-- Prefira configurar extensoes no bootstrap da aplicacao.
-- Instale apenas os modulos que a aplicacao realmente usa.
