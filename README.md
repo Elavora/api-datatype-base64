@@ -11,9 +11,13 @@ DataType Base64 para aplicações Elavora API.
 ```php
 use Elavora\Api\DataTypes\Base64;
 
-$valor = new Base64('exemplo');
-$normalizado = $valor->value();
+Base64::isValid('YXBp'); // true
+
+$valor = Base64::from('YXBp');
+$valor->value(); // 'YXBp'
 ```
+
+Entrada inválida em `Base64::from()` lança `InvalidArgumentException`.
 
 Especificação, exemplos e validação local: [docs/USO.md](docs/USO.md).
 
@@ -23,7 +27,14 @@ Especificação, exemplos e validação local: [docs/USO.md](docs/USO.md).
 composer require elavora/api-datatype-base64
 ```
 
-Requisitos: PHP 8.1 ou superior e `elavora/api-datatype-core` `^0.1`.
+Requisitos:
+
+- PHP 8.3 ou superior.
+- `elavora/api-datatype-core` `^2.0` (que traz o `elavora/api-framework` `^2.0`).
+
+Versão `1.0`: atualiza o pacote para o `elavora/api-datatype-core` 2.0, que substitui o `^0.1`, e passa a exigir
+PHP 8.3 ou superior. **Quebra:** o construtor deixa de ser público (no core 2 ele é `final protected`),
+então `new Base64(...)` não funciona mais; use `Base64::from(...)`. `isValid()` e `value()` não mudam.
 
 ## Desenvolvimento e testes
 
@@ -60,7 +71,7 @@ estão em [Desenvolvimento e testes](docs/DESENVOLVIMENTO.md).
 ## Versões
 
 Cada PR integrado na `main` gera uma versão automaticamente, conforme as labels do PR: sem a label `release` sai uma
-beta (`0.3.0-beta.1`), com ela sai a estável (`0.3.0`). As tags novas não têm o prefixo `v`, e as notas de cada
+beta (`1.1.0-beta.1`), com ela sai a estável (`1.1.0`). As tags novas não têm o prefixo `v`, e as notas de cada
 GitHub Release são geradas em português a partir dos PRs. Veja [Versões e release](docs/AUTOMACAO.md#versões-e-release).
 
 ## Documentação
