@@ -31,14 +31,13 @@ $normalizado = $valor->value();
 
 - `elavora/api-datatype-core` `^0.1`
 
-## Validacao no projeto consumidor
+## Validacao local
 
-Depois de instalar o pacote, rode os testes da aplicacao consumidora. Para uma verificacao isolada do pacote, use container:
-
-```bash
-docker run --rm -v "${PWD}:/workspace" -w "/workspace/api-datatype-base64" composer:2 composer validate --strict --no-check-publish
-docker run --rm -v "${PWD}:/workspace" -w "/workspace/api-datatype-base64" composer:2 sh -lc "find . \\( -path ./.git -o -path ./vendor \\) -prune -o -name '*.php' -print0 | xargs -0 -r -n1 php -l"
-```
+Como rodar os testes, o lint e o PHPStan, e como reproduzir o CI, esta em
+[Desenvolvimento e testes](DESENVOLVIMENTO.md). O `require-dev`, os `scripts` e o `config` de qualidade
+(`elavora/code-standards`, PHPStan, `lint`, `analyse`, `check`) estao descritos em
+[`composer.json` em Automacao](AUTOMACAO.md#composerjson). As restricoes de runtime (PHP `>=8.1` e
+`elavora/api-datatype-core` `^0.1`) nao mudam com a adocao do pipeline.
 
 ## Observacoes
 
