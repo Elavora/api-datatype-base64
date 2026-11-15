@@ -449,7 +449,7 @@ O exemplo mostra só as chaves que esta adoção cria ou muda, mais as de `requi
 - Este PR também é o upgrade do pacote: `php` sobe de `>=8.1` para `>=8.3`, e `elavora/api-datatype-core` sobe de
   `^0.1` para `^2.0`, que traz o `elavora/api-framework` `^2.0`. O ambiente de desenvolvimento e o CI já usam PHP 8.3
   (a imagem). O `src/` não muda (`Base64` continua só com `isValid()`), mas o upgrade quebra quem usa `new Base64(...)`:
-  no core 2 o construtor de `AbstractDataType` deixa de ser público, e a criação passa a ser `Base64::from()`
+  no core 2 o construtor de `AbstractDataType` deixa de ser público, e a criação passa a ser `new Base64()`
   (veja [Guia de uso](USO.md#versão-e-compatibilidade)). Em `extra.branch-alias`, `dev-main` passa de `0.1-dev` para `1.0-dev`.
 
 - `elavora/code-standards` fica em `require-dev`, nunca em `require`. A restrição é `^1.` seguido do minor (1 ou

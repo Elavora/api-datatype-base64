@@ -21,14 +21,14 @@ use Elavora\Api\DataTypes\Base64;
 
 Base64::isValid('YXBp'); // true
 
-$valor = Base64::from('YXBp');
+$valor = new Base64('YXBp');
 
 $valor->value();            // 'YXBp'
 (string) $valor;            // 'YXBp'
 json_encode($valor);        // '"YXBp"'
 ```
 
-O construtor não é público: crie sempre por `Base64::from()`.
+O construtor não é público: crie sempre por `new Base64()`.
 
 ## Versão e compatibilidade
 
@@ -45,7 +45,7 @@ ou superior.
 
 **Quebra de compatibilidade:** no `elavora/api-datatype-core` 2 o construtor de `AbstractDataType` é
 `final protected`, então `new Base64('YXBp')` deixa de funcionar fora da própria classe. Troque por
-`Base64::from('YXBp')`. `Base64::isValid()` e `value()` continuam iguais.
+`new Base64('YXBp')`. `Base64::isValid()` e `value()` continuam iguais.
 
 ### `composer.json`
 
@@ -63,7 +63,7 @@ O `composer.json` do pacote deve ter:
 
 ## Criação e entrada inválida
 
-`Elavora\Api\DataTypes\Base64::from(mixed $value): static` valida o valor com `isValid()` e devolve um `Base64` com o
+`Elavora\Api\DataTypes\new Base64(mixed $value): static` valida o valor com `isValid()` e devolve um `Base64` com o
 mesmo valor (não há normalização: `value()` devolve a string recebida). Se o valor for inválido, lança
 `\InvalidArgumentException` com a mensagem `Valor invalido para Elavora\Api\DataTypes\Base64.`
 
@@ -82,7 +82,7 @@ estrito); qualquer outro tipo devolve `false`.
 use Elavora\Api\DataTypes\Base64;
 
 try {
-    Base64::from('###'); // caracteres fora do alfabeto Base64
+    new Base64('###'); // caracteres fora do alfabeto Base64
 } catch (\InvalidArgumentException $e) {
     echo $e->getMessage(); // Valor invalido para Elavora\Api\DataTypes\Base64.
 }
@@ -93,7 +93,7 @@ Métodos da instância: `value(): string|int|bool|float|null` (aqui sempre `stri
 
 ## Dependências de runtime
 
-- `elavora/api-datatype-core` `^2.0`
+- `elavora/api-datatype-core` `^3.0`
 
 ## Validação local
 
