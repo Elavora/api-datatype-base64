@@ -13,11 +13,11 @@ use Elavora\Api\DataTypes\Base64;
 
 Base64::isValid('YXBp'); // true
 
-$valor = Base64::from('YXBp');
+$valor = new Base64('YXBp');
 $valor->value(); // 'YXBp'
 ```
 
-Entrada inválida em `Base64::from()` lança `InvalidArgumentException`.
+Entrada inválida em `new Base64()` lança `InvalidArgumentException`.
 
 Especificação, exemplos e validação local: [docs/USO.md](docs/USO.md).
 
@@ -30,11 +30,11 @@ composer require elavora/api-datatype-base64
 Requisitos:
 
 - PHP 8.3 ou superior.
-- `elavora/api-datatype-core` `^2.0` (que traz o `elavora/api-framework` `^2.0`).
+- `elavora/api-datatype-core` `^3.0` (que traz o `elavora/api-framework` `^3.0`).
 
 Versão `1.0`: atualiza o pacote para o `elavora/api-datatype-core` 2.0, que substitui o `^0.1`, e passa a exigir
 PHP 8.3 ou superior. **Quebra:** o construtor deixa de ser público (no core 2 ele é `final protected`),
-então `new Base64(...)` não funciona mais; use `Base64::from(...)`. `isValid()` e `value()` não mudam.
+então `new Base64(...)` não funciona mais; use `new Base64(...)`. `isValid()` e `value()` não mudam.
 
 ## Desenvolvimento e testes
 

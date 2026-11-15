@@ -59,7 +59,7 @@ final class Base64Test extends TestCase
     #[DataProvider('validProvider')]
     public function testFromCreatesInstanceWithoutNormalization(string $value): void
     {
-        $base64 = Base64::from($value);
+        $base64 = new Base64($value);
 
         self::assertInstanceOf(Base64::class, $base64);
         self::assertSame($value, $base64->value());
@@ -73,7 +73,7 @@ final class Base64Test extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Valor invalido para Elavora\Api\DataTypes\Base64.');
 
-        Base64::from($value);
+        new Base64($value);
     }
 
     public function testConstructorIsNotPublic(): void
