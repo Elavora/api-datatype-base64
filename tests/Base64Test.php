@@ -76,11 +76,11 @@ final class Base64Test extends TestCase
         new Base64($value);
     }
 
-    public function testConstructorIsNotPublic(): void
+    public function testConstructorIsPublic(): void
     {
         $constructor = new ReflectionMethod(Base64::class, '__construct');
 
-        self::assertFalse($constructor->isPublic());
+        self::assertTrue($constructor->isPublic());
         self::assertTrue($constructor->isProtected());
     }
 }
