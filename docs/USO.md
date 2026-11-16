@@ -91,6 +91,18 @@ try {
 Métodos da instância: `value(): string|int|bool|float|null` (aqui sempre `string`), `jsonSerialize()` (mesmo valor) e
 `__toString()`.
 
+## Documentação do tipo (OPTIONS)
+
+`Base64` implementa `Elavora\Api\Framework\Contracts\DescribesType`. O `OPTIONS` público da API usa
+`Base64::documentedType()` para documentar o campo sem expor o nome da classe PHP. Declara:
+
+- `type`: `string`
+- `format`: `base64`
+- `example`: `YXBp`
+- `description`: texto codificado em Base64
+
+A validação continua sendo feita por `isValid()`; o array só descreve o formato.
+
 ## Dependências de runtime
 
 - `elavora/api-datatype-core` `^4.0`
